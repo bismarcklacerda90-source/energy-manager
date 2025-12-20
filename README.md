@@ -1,39 +1,38 @@
-<<<<<<< HEAD
-# energy-manager
-=======
-# 🎮 Energy Manager – Jogo em Java
+# Energy Manager (Java Console Game)
 
-Energy Manager é um jogo de lógica desenvolvido em **Java**, executado via terminal, com foco em **gestão de recursos**, **tomada de decisão** e **Programação Orientada a Objetos**.
+Energy Manager is a simple Java console game focused on **resource and energy management**.
+The player must control which devices are turned on while respecting the maximum energy limit.
 
-O jogador é responsável por administrar equipamentos e consumo de energia, enfrentando falhas aleatórias e tentando sobreviver até o final do jogo.
+This project was created as a learning exercise for **Java programming and system logic**.
 
 ---
 
-## 🎯 Objetivo do Jogo
-Manter o sistema funcionando sem ultrapassar o limite de energia e **sobreviver por 10 turnos**.
-
-- Cada turno representa o avanço do tempo
-- Falhas podem ocorrer aleatoriamente
-- Se o consumo de energia ultrapassar o limite → **Game Over**
-- Se chegar ao último turno → **Vitória**
+## 🎮 How the Game Works
+- You start with a fixed amount of energy
+- Each device consumes energy when turned on
+- If total consumption exceeds the energy limit → **Game Over**
+- Survive all turns to win the game
 
 ---
 
-## 🕹️ Como Jogar
-- Escolha os equipamentos para ligar ou desligar
-- Avance os turnos
-- Gerencie o consumo de energia
-- Reaja a falhas inesperadas
-
-O jogo é totalmente baseado em texto (terminal).
-
----
-
-## 🛠️ Tecnologias Utilizadas
-- Java 17
-- Programação Orientada a Objetos
-- Terminal (CLI)
+## 🧩 Features
+- Turn-based system
+- Energy consumption control
+- Multiple devices (Server, Router, Camera, NoBreak)
+- Win and lose conditions
+- Clean object-oriented structure
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🛠 Technologies
+- Java
+- Object-Oriented Programming (OOP)
+- Console-based interaction
+
+---
+
+## ▶️ How to Run
+
+### Compile:
+```bash
+javac src/model/Equipamento.java src/service/SistemaEnergia.java src/Main.java#

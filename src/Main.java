@@ -4,33 +4,44 @@ import service.SistemaEnergia;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
 
+        // Equipamentos
         Equipamento servidor = new Equipamento("Servidor", 30);
         Equipamento roteador = new Equipamento("Roteador", 10);
+        Equipamento camera = new Equipamento("Câmera", 15);
+        Equipamento nobreak = new Equipamento("NoBreak", 20);
 
-        List<Equipamento> equipamentos = Arrays.asList(servidor, roteador);
-        SistemaEnergia sistema = new SistemaEnergia(50, equipamentos);
+        List<Equipamento> equipamentos = Arrays.asList(
+            servidor, roteador, camera, nobreak
+        );
 
+SistemaEnergia sistema = new SistemaEnergia(50, equipamentos);
         int turno = 1;
         final int TURNO_MAX = 10;
+        int pontos = 0;
 
         while (true) {
+
             System.out.println("\n=== ENERGY MANAGER ===");
             System.out.println("Turno: " + turno + "/" + TURNO_MAX);
+            System.out.println("Pontuação: " + pontos);
             System.out.println("Energia total: " + sistema.getEnergiaTotal());
             System.out.println("Consumo atual: " + sistema.consumoAtual());
 
-            // Condição de derrota
+            // Derrota
             if (sistema.consumoAtual() > sistema.getEnergiaTotal()) {
                 System.out.println("💥 ENERGIA ESTOURADA! GAME OVER");
+                System.out.println("Pontuação final: " + pontos);
                 break;
             }
 
-            // Condição de vitória
+            // Vitória
             if (turno > TURNO_MAX) {
                 System.out.println("🏆 PARABÉNS! VOCÊ VENCEU!");
+                System.out.println("Pontuação final: " + (pontos + 100));
                 break;
             }
 
@@ -39,13 +50,14 @@ public class Main {
                 Equipamento e = equipamentos.get(i);
                 System.out.println(
                     (i + 1) + " - " + e.getNome() +
-                    (e.isLigado() ? " (Ligado)" : " (Desligado)")
+                    (e.isLigado() ? " (Ligado)" : " (Desligado)") +
+                    " | Consumo: " + e.getConsumo()
                 );
             }
 
             System.out.println("0 - Avançar turno");
-            int op;
 
+            int op;
             try {
                 op = sc.nextInt();
             } catch (Exception e) {
@@ -54,9 +66,11 @@ public class Main {
                 continue;
             }
 
+            // Avançar turno
             if (op == 0) {
-                // Falha aleatória
-                if (random.nextInt(100) < 30) { // 30% de chance
+
+                // Falha aleatória (30%)
+                if (random.nextInt(100) < 30) {
                     Equipamento falhou = equipamentos.get(
                         random.nextInt(equipamentos.size())
                     );
@@ -64,6 +78,7 @@ public class Main {
                     System.out.println("⚠️ FALHA! " + falhou.getNome() + " desligou!");
                 }
 
+                pontos += 10;
                 turno++;
                 continue;
             }
@@ -77,10 +92,10 @@ public class Main {
 
             if (!escolhido.isLigado() && sistema.podeLigar(escolhido)) {
                 escolhido.ligar();
-                System.out.println(escolhido.getNome() + " ligado.");
+                System.out.println(escolhido.getNome() + " LIGADO");
             } else {
                 escolhido.desligar();
-                System.out.println(escolhido.getNome() + " desligado.");
+                System.out.println(escolhido.getNome() + " DESLIGADO");
             }
         }
 
